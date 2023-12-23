@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'django_filters',
+    'drf_yasg',
 
     'users',
     'lesson',
@@ -141,3 +142,5 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ]
 }
+
+STRIPE_API_KEY = "sk_test_51OQSKmA019y72R72lU8NPNVqX6oUooHlfeawh7oxUxbBlmY6sRZX40mQ8mKSY1OdLYuXyKTGCncNg9Ao08l3g8o4003Tib0dzI"

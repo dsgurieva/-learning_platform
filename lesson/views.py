@@ -7,6 +7,7 @@ from rest_framework.permissions import IsAuthenticated #, AllowAny
 
 
 class CourseViewSet(viewsets.ModelViewSet):
+    """Viewset for course"""
     serializer_class = CourseSerializer
     queryset = Course.objects.all()
     permission_classes = [IsAuthenticated]
@@ -30,6 +31,7 @@ class CourseViewSet(viewsets.ModelViewSet):
 
 
 class LessonCreateAPIView(generics.CreateAPIView):
+    """Lesson create API view"""
     serializer_class = LessonSerializer
     permission_classes = [IsAuthenticated | IsStaff]
     #permission_classes = [AllowAny]
@@ -41,6 +43,7 @@ class LessonCreateAPIView(generics.CreateAPIView):
 
 
 class LessonListAPIView(generics.ListAPIView):
+    """Lesson list API view"""
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
     permission_classes = [IsOwner | IsStaff]
@@ -48,23 +51,27 @@ class LessonListAPIView(generics.ListAPIView):
 
 
 class LessonRetrieveAPIView(generics.RetrieveAPIView):
+    """Lesson retrieve API view"""
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
     permission_classes = [IsOwner | IsStaff]
 
 
 class LessonUpdateAPIView(generics.UpdateAPIView):
+    """Lesson update API view"""
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
     permission_classes = [IsOwner | IsStaff]
 
 
 class LessonDestroyAPIView(generics.DestroyAPIView):
+    """Lesson delete API view"""
     queryset = Lesson.objects.all()
     permission_classes = [IsOwner | IsStaff]
 
 
 class SubscriptionCreateAPIView(generics.CreateAPIView):
+    """Subscription create API view"""
     serializer_class = SubscriptionSerializer
 
     def perform_create(self, serializer):
@@ -74,11 +81,13 @@ class SubscriptionCreateAPIView(generics.CreateAPIView):
 
 
 class SubscriptionListAPIView(generics.ListAPIView):
+    """Subscription list API view"""
     serializer_class = SubscriptionSerializer
     queryset = Lesson.objects.all()
     permission_classes = [IsOwner, IsStaff]
 
 
 class SubscriptionDeleteAPIView(generics.DestroyAPIView):
+    """Subscription delete API view"""
     queryset = Lesson.objects.all()
     permission_classes = [IsOwner, IsStaff]
