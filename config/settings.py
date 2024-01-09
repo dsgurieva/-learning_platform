@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'drf_yasg',
+    'django_celery_beat',
 
     'users',
     'lesson',
@@ -143,4 +144,16 @@ REST_FRAMEWORK = {
     ]
 }
 
-STRIPE_API_KEY = "sk_test_51OQSKmA019y72R72lU8NPNVqX6oUooHlfeawh7oxUxbBlmY6sRZX40mQ8mKSY1OdLYuXyKTGCncNg9Ao08l3g8o4003Tib0dzI"
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
