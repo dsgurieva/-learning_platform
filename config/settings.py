@@ -164,4 +164,8 @@ CELERY_BEAT_SCHEDULE = {
         'task': 'user.tasks.check_user_activity',
         'schedule': timedelta(days=1),
     },
+    'task-_lesson': {
+        'task': 'lesson.tasks._send_email',
+        'schedule': timedelta(days=1),
+    },
 }
