@@ -3,7 +3,8 @@ from lesson.models import Course, Lesson
 from lesson.paginators import LessonPaginator, CoursePaginator
 from lesson.permissions import IsStaff, IsOwner
 from lesson.serializers import CourseSerializer, LessonSerializer, SubscriptionSerializer
-from rest_framework.permissions import IsAuthenticated #, AllowAny
+from rest_framework.permissions import IsAuthenticated #, AllowAny\
+from lesson.tasks import _send_email
 
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -28,6 +29,10 @@ class CourseViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+    def perform_update(self, serializer):
+        updated_course = serializer.save()
+        _send_email.delay(updated_course.pk)
 
 
 class LessonCreateAPIView(generics.CreateAPIView):
